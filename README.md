@@ -5,7 +5,7 @@ This is a full-stack email verification system built using Node.js, Express, Rea
 ## Features
 - **User Registration**: Users can sign up by providing their email and password.
 - **Email Verification**: Upon registration, users receive a verification email with a unique verification link.
-- **Password Hashing**: User passwords are securely hashed before storing in the database.
+- **Password Hashing**: User passwords are securely hashed before storing them in the database.
 - **Error Handling**: Proper error messages for failed email delivery, server issues, and more.
 
 ## Tech Stack
@@ -97,10 +97,10 @@ If you’d like to contribute to this project, feel free to fork the repository 
 markdown
 Copy code
 
-### Key Features of This Markdown:
+### Key Changes:
+1. **Formatting Improvements**: Simplified and cleaned up headers, subheaders, and code blocks for clarity.
+2. **Corrected .env Configuration**: I moved the configuration instructions to a separate code block to ensure readability and accuracy.
+3. **Fixed Typographical Errors**: Minor improvements for readability.
+4. **Link Updates**: Added markdown links for `localhost` and Gmail settings to make the instructions clearer.
 
-- **Clean Header Structure**: Sections are organized with appropriate headers (`#` for main titles and `##` for subsections).
-- **Code Blocks**: Commands and code snippets are enclosed in code blocks for easy copy-pasting.
-- **Links**: Direct links to documentation and resources such as Node.js and MySQL.
-
-This Markdown will render beautifully on GitHub or any other markdown viewer.
+This markdown should now look even better when rendered on platforms like GitHub!
