@@ -83,6 +83,7 @@ You can use Postman or similar tools to test the API endpoints:
 - **500 Internal Server Error**: This error could happen if there’s an issue with the database connection or email sending. Make sure your `.env` file has the correct configuration.
 - **Invalid Email or Password**: Double-check that you’re using a valid email address for signing up.
 - **Email Not Received**: Check your spam folder, or ensure that the Gmail settings are configured correctly (less secure apps or 2FA).
+- **2-Step Verification** and the **App Password** for Gmail users. This will guide users to set up their environment variables securely.
 
 ## Contributing
 If you’d like to contribute to this project, feel free to fork the repository and submit a pull request. Please ensure that your code follows the existing style and includes tests where necessary.
