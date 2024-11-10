@@ -25,82 +25,45 @@ Make sure you have the following installed:
 - **Gmail Account**: You'll need a Gmail account to send emails for verification. If you haven't done so already, consider enabling App-Specific Passwords for enhanced security.
 
 ### Clone the Repository
-```bash
-git clone https://github.com/your-username/email-verification-system.git
-cd email-verification-system
-Install Dependencies
-Backend (Node.js & Express)
-Navigate to the server directory and install backend dependencies:
+Clone the repository from GitHub and navigate into the project directory.
 
-bash
-Copy code
-cd server
-npm install
-Create a .env file in the server directory and add the following:
+### Install Dependencies
 
-plaintext
-Copy code
-PORT=4044
-JWT_SECRET=your_jwt_secret
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_email_password
-DB_HOST=localhost
-DB_NAME=your_database_name
-DB_USER=your_database_user
-DB_PASSWORD=your_database_password
-Replace your_email@gmail.com and your_email_password with your Gmail credentials. Replace your_jwt_secret, your_database_name, and your_database_user with appropriate values.
+#### Backend (Node.js & Express)
+Navigate to the server directory and install the required backend dependencies.
 
-Frontend (React)
-Navigate to the client directory and install frontend dependencies:
+Create a `.env` file in the server directory and configure the necessary environment variables for your server, database, and Gmail credentials.
 
-bash
-Copy code
-cd client
-npm install
-Start the Project
-Backend (Node.js)
-Run the backend server:
+#### Frontend (React)
+Navigate to the client directory and install the required frontend dependencies.
 
-bash
-Copy code
-cd server
-npm start
-The server will run on http://localhost:4044.
+### Start the Project
 
-Frontend (React)
-Start the React development server:
+#### Backend (Node.js)
+Run the backend server. The server will be running on `http://localhost:4044`.
 
-bash
-Copy code
-cd client
-npm start
-The frontend will be available at http://localhost:3000.
+#### Frontend (React)
+Start the React development server. The frontend will be available at `http://localhost:3000`.
 
-How to Use
-Sign Up: Go to the frontend application and provide your email and password to register.
-Verify Email: Check your inbox for an email with a verification link. Click on the link to verify your email.
-Login: Once verified, you can log in to the application.
-Testing
+## How to Use
+1. **Sign Up**: Go to the frontend application and provide your email and password to register.
+2. **Verify Email**: Check your inbox for an email with a verification link. Click on the link to verify your email.
+3. **Login**: Once verified, you can log in to the application.
+
+## Testing
 You can use Postman or similar tools to test the API endpoints:
 
-POST /signup: To create a new user.
-GET /verify-email/
-: To verify the email address.
-POST /login: To log in with the registered email and password.
-Troubleshooting
-500 Internal Server Error: This error could happen if there’s an issue with the database connection or email sending. Make sure your .env file has the correct configuration.
-Invalid Email or Password: Double-check that you’re using a valid email address for signing up.
-Email Not Received: Check your spam folder, or ensure that the Gmail settings are configured correctly (less secure apps or 2FA).
-Contributing
+- **POST /signup**: To create a new user.
+- **GET /verify-email/:token**: To verify the email address.
+- **POST /login**: To log in with the registered email and password.
+
+## Troubleshooting
+- **500 Internal Server Error**: This error could happen if there’s an issue with the database connection or email sending. Make sure your `.env` file has the correct configuration.
+- **Invalid Email or Password**: Double-check that you’re using a valid email address for signing up.
+- **Email Not Received**: Check your spam folder, or ensure that the Gmail settings are configured correctly (less secure apps or 2FA).
+
+## Contributing
 If you’d like to contribute to this project, feel free to fork the repository and submit a pull request. Please ensure that your code follows the existing style and includes tests where necessary.
-
-markdown
-Copy code
-
-### Key Changes:
-1. **Formatting Improvements**: Simplified and cleaned up headers, subheaders, and code blocks for clarity.
-2. **Corrected .env Configuration**: I moved the configuration instructions to a separate code block to ensure readability and accuracy.
-3. **Fixed Typographical Errors**: Minor improvements for readability.
-4. **Link Updates**: Added markdown links for `localhost` and Gmail settings to make the instructions clearer.
-
-This markdown should now look even better when rendered on platforms like GitHub!
+Key Changes:
+Code Sections Removed: All code blocks and command lines were removed as requested, leaving only the textual instructions for setup, usage, and troubleshooting.
+Content Structure: Kept the content structure intact to maintain clarity and usability.
