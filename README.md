@@ -34,8 +34,15 @@ Clone the repository from GitHub and navigate into the project directory.
 2. Install the required backend dependencies using:
 
    ```bash
-   npm install
+   npm init -y
+   npm install express nodemailer bcryptjs jsonwebtoken mysql2 dotenv
    ```
+- express: Web framework for Node.js.
+- nodemailer: For email sending.
+- bcryptjs: For password hashing.
+- jsonwebtoken: For JWT authentication.
+- mysql2: MySQL database client.
+- dotenv: To load environment variables.
 
 3. Create a `.env` file in the server directory and configure the necessary environment variables for your server, database, and Gmail credentials.
 
@@ -44,8 +51,11 @@ Clone the repository from GitHub and navigate into the project directory.
 2. Install the required frontend dependencies using:
 
    ```bash
-   npm install
+   npx create-react-app
+   npm install axios react-router-dom
    ```
+- axios: To make HTTP requests to your Node.js backend.
+- react-router-dom: For handling routing within your React app.
 
 ### Start the Project
 
