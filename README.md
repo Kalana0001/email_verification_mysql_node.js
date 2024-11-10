@@ -1,4 +1,3 @@
-```markdown
 # Email Verification System
 
 This is a full-stack email verification system built using Node.js, Express, React, and Nodemailer. The system allows users to sign up, receive a verification email, and verify their email addresses before they can log in.
