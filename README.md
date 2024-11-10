@@ -1,3 +1,4 @@
+```markdown
 # Email Verification System
 
 This is a full-stack email verification system built using Node.js, Express, React, and Nodemailer. The system allows users to sign up, receive a verification email, and verify their email addresses before they can log in.
@@ -30,20 +31,42 @@ Clone the repository from GitHub and navigate into the project directory.
 ### Install Dependencies
 
 #### Backend (Node.js & Express)
-Navigate to the server directory and install the required backend dependencies.
+1. Navigate to the server directory.
+2. Install the required backend dependencies using:
 
-Create a `.env` file in the server directory and configure the necessary environment variables for your server, database, and Gmail credentials.
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the server directory and configure the necessary environment variables for your server, database, and Gmail credentials.
 
 #### Frontend (React)
-Navigate to the client directory and install the required frontend dependencies.
+1. Navigate to the client directory.
+2. Install the required frontend dependencies using:
+
+   ```bash
+   npm install
+   ```
 
 ### Start the Project
 
 #### Backend (Node.js)
-Run the backend server. The server will be running on `http://localhost:4044`.
+Run the backend server:
+
+```bash
+npm start
+```
+
+The backend will be running on `http://localhost:4044`.
 
 #### Frontend (React)
-Start the React development server. The frontend will be available at `http://localhost:3000`.
+Start the React development server:
+
+```bash
+npm start
+```
+
+The frontend will be available at `http://localhost:3000`.
 
 ## How to Use
 1. **Sign Up**: Go to the frontend application and provide your email and password to register.
@@ -64,6 +87,4 @@ You can use Postman or similar tools to test the API endpoints:
 
 ## Contributing
 If you’d like to contribute to this project, feel free to fork the repository and submit a pull request. Please ensure that your code follows the existing style and includes tests where necessary.
-Key Changes:
-Code Sections Removed: All code blocks and command lines were removed as requested, leaving only the textual instructions for setup, usage, and troubleshooting.
-Content Structure: Kept the content structure intact to maintain clarity and usability.
+```
