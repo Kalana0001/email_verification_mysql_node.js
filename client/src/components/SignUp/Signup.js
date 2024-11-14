@@ -23,26 +23,27 @@ function Signup() {
 
     try {
       const response = await axios.post('https://email-verification-mysql-node-js-server.vercel.app/signup', { email, password });
-      setMessage(response.data);
+      setMessage(response.data); // Successful signup message
       setEmail('');
       setPassword('');
       setLoading(false);
 
-      // Redirect to /verify
+      // Redirect to /verify after successful signup
       navigate('/verify');
     } catch (error) {
-      setMessage(error.response?.data || 'Error signing up');
+      setMessage(error.response?.data || 'Error signing up. Please try again.');
       setLoading(false);
     }
   };
 
   // Function to test DB connection
   const handleTestDbConnection = async () => {
+    setDbConnectionMessage('Testing database connection...');
     try {
       const response = await axios.get('https://email-verification-mysql-node-js-server.vercel.app/test-db');
       setDbConnectionMessage(response.data); // Set message from DB test route
     } catch (error) {
-      setDbConnectionMessage('Error connecting to the database.');
+      setDbConnectionMessage('Error connecting to the database. Please try again.');
     }
   };
 

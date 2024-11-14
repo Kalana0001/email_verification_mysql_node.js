@@ -14,7 +14,9 @@ app.use(cors({
 
 // MySQL Database connection
 let db;
-(async () => {
+
+// Function to initialize the database connection
+const initDbConnection = async () => {
   try {
     db = await mysql.createConnection({
       host: process.env.DB_HOST,
@@ -26,7 +28,10 @@ let db;
   } catch (err) {
     console.error('Database connection failed:', err.stack);
   }
-})();
+};
+
+// Initialize DB connection
+initDbConnection();
 
 // Email transporter setup using Gmail
 const transporter = nodemailer.createTransport({
@@ -64,11 +69,12 @@ app.post('/signup', async (req, res) => {
     };
 
     // Send the verification email
-    await transporter.sendMail(mailOptions);
-    res.status(200).send('User created. Please check your email for verification.');
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) return res.status(500).send('Error sending verification email');
+      res.status(200).send('User created. Please check your email for verification.');
+    });
   } catch (error) {
-    console.error("Signup Error:", error);
-    res.status(500).send('Error saving user or sending verification email.');
+    res.status(500).send('Error saving user');
   }
 });
 
@@ -87,25 +93,28 @@ app.post('/verify', async (req, res) => {
       res.status(400).send('Invalid verification token');
     }
   } catch (error) {
-    console.error("Verification Error:", error);
     res.status(500).send('Error verifying email');
   }
 });
 
-// Root route
-app.get('/', (req, res) => {
-  res.send('Server is running!');
-});
-
-// Database connection test route (optional for debugging)
+// Test DB connection route
 app.get('/test-db', async (req, res) => {
   try {
-    await db.query('SELECT 1');
-    res.status(200).send('Database connection is successful!');
+    if (db) {
+      await db.query('SELECT 1'); // Basic query to test the connection
+      res.status(200).send('Database connection is successful!');
+    } else {
+      res.status(500).send('Database connection is not initialized.');
+    }
   } catch (error) {
     console.error("Database Connection Test Error:", error);
     res.status(500).send('Error connecting to the database.');
   }
+});
+
+// Health check route
+app.get('/', (req, res) => {
+  res.send('Server Is Running!');
 });
 
 // Server setup
