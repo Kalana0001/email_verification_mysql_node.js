@@ -64,12 +64,11 @@ app.post('/signup', async (req, res) => {
     };
 
     // Send the verification email
-    transporter.sendMail(mailOptions, (error) => {
-      if (error) return res.status(500).send('Error sending verification email');
-      res.status(200).send('User created. Please check your email for verification.');
-    });
+    await transporter.sendMail(mailOptions);
+    res.status(200).send('User created. Please check your email for verification.');
   } catch (error) {
-    res.status(500).send('Error saving user');
+    console.error("Signup Error:", error);
+    res.status(500).send('Error saving user or sending verification email.');
   }
 });
 
@@ -88,14 +87,26 @@ app.post('/verify', async (req, res) => {
       res.status(400).send('Invalid verification token');
     }
   } catch (error) {
+    console.error("Verification Error:", error);
     res.status(500).send('Error verifying email');
   }
 });
 
+// Root route
 app.get('/', (req, res) => {
-  res.send('Server Is Running!');
+  res.send('Server is running!');
 });
 
+// Database connection test route (optional for debugging)
+app.get('/test-db', async (req, res) => {
+  try {
+    await db.query('SELECT 1');
+    res.status(200).send('Database connection is successful!');
+  } catch (error) {
+    console.error("Database Connection Test Error:", error);
+    res.status(500).send('Error connecting to the database.');
+  }
+});
 
 // Server setup
 const port = process.env.PORT || 4044;
