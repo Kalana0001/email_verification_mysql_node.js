@@ -92,6 +92,11 @@ app.post('/verify', async (req, res) => {
   }
 });
 
+app.get('/', (req, res) => {
+  res.send('Server Is Running!');
+});
+
+
 // Server setup
 const port = process.env.PORT || 4044;
 app.listen(port, () => console.log(`Server running on port ${port}`));
