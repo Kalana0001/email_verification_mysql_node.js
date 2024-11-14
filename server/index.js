@@ -1,6 +1,6 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
-const mysql = require('mysql2');
+const mysql = require("mysql2/promise");
 const dotenv = require('dotenv');
 const cors = require('cors');
 
@@ -8,21 +8,25 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: '*' }));
+app.use(cors({
+  origin: '*', // Allow all origins
+}));
 
 // MySQL Database connection
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-});
-
-// Connect to the database
-db.connect(err => {
-  if (err) console.error('Database connection failed:', err.stack);
-  else console.log('Connected to the MySQL database.');
-});
+let db;
+(async () => {
+  try {
+    db = await mysql.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME
+    });
+    console.log('Connected to the MySQL database.');
+  } catch (err) {
+    console.error('Database connection failed:', err.stack);
+  }
+})();
 
 // Email transporter setup using Gmail
 const transporter = nodemailer.createTransport({
@@ -34,13 +38,13 @@ const transporter = nodemailer.createTransport({
 });
 
 // Signup route
-app.post('/signup', (req, res) => {
+app.post('/signup', async (req, res) => {
   const { email, password } = req.body;
   const verificationToken = Math.floor(100000 + Math.random() * 900000);
 
-  const query = 'INSERT INTO customers (email, password, verification_token) VALUES (?, ?, ?)';
-  db.query(query, [email, password, verificationToken], (err) => {
-    if (err) return res.status(500).send('Error saving user');
+  try {
+    const query = 'INSERT INTO customers (email, password, verification_token) VALUES (?, ?, ?)';
+    await db.query(query, [email, password, verificationToken]);
 
     // Prepare the email with instructions
     const mailOptions = {
@@ -64,28 +68,32 @@ app.post('/signup', (req, res) => {
       if (error) return res.status(500).send('Error sending verification email');
       res.status(200).send('User created. Please check your email for verification.');
     });
-  });
+  } catch (error) {
+    res.status(500).send('Error saving user');
+  }
 });
 
 // Verification route
-app.post('/verify', (req, res) => {
+app.post('/verify', async (req, res) => {
   const { email, verificationToken } = req.body;
   const query = 'SELECT * FROM customers WHERE email = ? AND verification_token = ?';
 
-  db.query(query, [email, verificationToken], (err, result) => {
-    if (err) return res.status(500).send('Error verifying email');
+  try {
+    const [result] = await db.query(query, [email, verificationToken]);
     if (result.length > 0) {
       const updateQuery = 'UPDATE customers SET verified = TRUE WHERE email = ?';
-      db.query(updateQuery, [email], (err) => {
-        if (err) return res.status(500).send('Error updating verification status');
-        res.status(200).send('Email verified successfully!');
-      });
+      await db.query(updateQuery, [email]);
+      res.status(200).send('Email verified successfully!');
     } else {
       res.status(400).send('Invalid verification token');
     }
-  });
+  } catch (error) {
+    res.status(500).send('Error verifying email');
+  }
 });
 
 // Server setup
 const port = process.env.PORT || 4044;
 app.listen(port, () => console.log(`Server running on port ${port}`));
+
+module.exports = app;
