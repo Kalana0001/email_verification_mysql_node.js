@@ -10,7 +10,7 @@ function VerifyEmail({ onClose }) {
   const handleVerify = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4044/verify', { email, verificationToken: token });
+      const response = await axios.post('https://email-verification-mysql-node-js-server.vercel.app/verify', { email, verificationToken: token });
       setMessage(response.data);
     } catch (error) {
       setMessage('Invalid verification token');

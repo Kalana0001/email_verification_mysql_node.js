@@ -21,7 +21,7 @@ function Signup() {
     }
 
     try {
-      const response = await axios.post('http://localhost:4044/signup', { email, password });
+      const response = await axios.post('https://email-verification-mysql-node-js-server.vercel.app/signup', { email, password });
       setMessage(response.data);
       setEmail('');
       setPassword('');
